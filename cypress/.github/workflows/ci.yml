@@ -1,0 +1,43 @@
+name: Cypress API CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # checkout
+      - uses: actions/checkout@v4
+
+      # Node 18
+      - uses: actions/setup-node@v4
+        with: { node-version: 18 }
+
+      # install deps
+      - run: npm ci
+
+      # download WireMock (jar fora do repo)
+      - name: Get WireMock
+        run: |
+          mkdir wiremock-jar
+          curl -L -o wiremock-jar/wiremock.jar \
+            https://repo1.maven.org/maven2/com/github/tomakehurst/wiremock-standalone/2.27.2/wiremock-standalone-2.27.2.jar
+
+      # start WireMock (bg) on 4567
+      - name: Start WireMock
+        run: |
+          java -jar wiremock-jar/wiremock.jar --port 4567 --root-dir wiremock &
+          sleep 5
+
+      # run cypress tests
+      - name: Cypress run
+        run: npm test
+
+      # upload evidence logs (always, even if tests fail)
+      - name: Upload API Call Logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: api-call-logs
+          path: cypress/logs
