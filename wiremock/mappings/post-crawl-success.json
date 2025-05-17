@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/crawl",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.keyword =~ /.{4,32}/i)]"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": "30vbllyb"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/crawl",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.keyword =~ /.{0,3}/)]"
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "jsonBody": {
+      "error": "Keyword must be between 4 and 32 characters"
+    }
+  }
+}

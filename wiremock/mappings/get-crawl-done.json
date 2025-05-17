@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/crawl/30vbllyb"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": "30vbllyb",
+      "status": "done",
+      "urls": [
+        "http://hiring.axreng.com/index2.html",
+        "http://hiring.axreng.com/htmlman1/chcon.1.html"
+      ]
+    }
+  }
+}
