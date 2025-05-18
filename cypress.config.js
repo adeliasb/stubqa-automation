@@ -14,7 +14,7 @@ module.exports = {
         printLogsToFile: 'always',      // cria um .txt por execução
         outputRoot: 'cypress/logs',     // pasta onde o arquivo ficará
         includeSuccessfulHookLogs: false,
-        collectTestLogs: true
+        collectTestLogs: (test) => true
       })
     }
   }
