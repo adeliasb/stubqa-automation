@@ -13,8 +13,12 @@ module.exports = {
       installLogsPrinter(on, {
         printLogsToFile: 'always',      // cria um .txt por execução
         outputRoot: 'cypress/logs',     // pasta onde o arquivo ficará
+        outputTarget: {
+          'cypress/logs/test-output.txt': 'txt',
+        },
         includeSuccessfulHookLogs: false,
-        collectTestLogs: (test) => true
+        collectTestLogs: (test) => true,
+        printLogsToConsole: false
       })
     }
   }
