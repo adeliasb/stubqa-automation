@@ -1,25 +1,20 @@
-module.exports = {
-  e2e: {
-    baseUrl: 'http://localhost:4567'
-  }
-};
+// cypress.config.js  – única versão válida
 const installLogsPrinter = require('cypress-terminal-report/src/installLogsPrinter')
 
+/** @type {import('cypress').Cypress.config} */
 module.exports = {
-  reporter: 'spec',          // qualquer reporter
+  reporter: 'spec',                 // ou mochawesome, etc., se quiser
   e2e: {
     baseUrl: 'http://localhost:4567',
-    setupNodeEvents(on) {
+    setupNodeEvents (on, config) {
+      // instala o cypress‑terminal‑report
       installLogsPrinter(on, {
-        printLogsToFile: 'always',      // cria um .txt por execução
-        outputRoot: 'cypress/logs',     // pasta onde o arquivo ficará
-        outputTarget: {
-          'cypress/logs/test-output.txt': 'txt',
-        },
-        includeSuccessfulHookLogs: false,
-        collectTestLogs: (test) => true,
-        printLogsToConsole: 'never'
+        outputRoot: 'cypress/logs',          // pasta a ser gerada AUTOMATICAMENTE
+        outputTarget: { 'run-log.txt': 'txt' },
+        printLogsToConsole: 'always',
       })
-    }
-  }
+
+      return config                      // sempre retorne o config
+    },
+  },
 }
