@@ -18,7 +18,7 @@ module.exports = {
         },
         includeSuccessfulHookLogs: false,
         collectTestLogs: (test) => true,
-        printLogsToConsole: false
+        printLogsToConsole: 'never'
       })
     }
   }
